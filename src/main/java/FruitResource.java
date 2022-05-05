@@ -34,7 +34,7 @@ public class FruitResource {
   FruitService service;
 
   @Inject
-  @ConfigProperty(name = "myapp.schema.create", defaultValue = "false")
+  @ConfigProperty(name = "myapp.schema.create", defaultValue = "true")
   boolean schemaCreate;
 
   @PostConstruct

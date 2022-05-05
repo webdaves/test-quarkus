@@ -1,10 +1,13 @@
+import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
 import io.vertx.mutiny.pgclient.PgPool;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.stream.StreamSupport;
-
+@ApplicationScoped
+@Blocking
 public class FruitRepository implements BaseRepository {
 
     @Inject
