@@ -31,6 +31,9 @@ public class FruitResource {
   PgPool client;
 
   @Inject
+  FruitService service;
+
+  @Inject
   @ConfigProperty(name = "myapp.schema.create", defaultValue = "false")
   boolean schemaCreate;
 
@@ -50,42 +53,10 @@ public class FruitResource {
         .await().indefinitely();
   }
 
-  // @GET
-  // public Multi<Fruit> get() {
-  // return null;
-  // }
-
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Multi<Fruit> getAllfruit() {
-    return findAll();
+    return service.findAll();
   }
 
-  public Multi<Fruit> findAll() {
-    return this.client
-        .query("SELECT * FROM fruit")
-        .execute()
-        .onItem()
-        .transformToMulti(
-            rs -> Multi.createFrom().items(() -> StreamSupport.stream(rs.spliterator(), false)))
-        .map(rs -> Fruit.from(rs));
-  }
-
-  // public Uni<List<Fruit>> findAll() {
-  // return this.client
-  // .query("SELECT * FROM fruit").execute()
-  // .map(rs -> {
-  // var result = new ArrayList<Fruit>(rs.size());
-  // for (Row row : rs) {
-  // result.add(Fruit.from(row));
-  // }
-  // return result;
-  // });
-  // }
-
-  // private Fruit rowToFruit(Row row) {
-  // return Fruit.of(row.getUUID("id"), row.getString("title"),
-  // row.getString("content"),
-  // row.getLocalDateTime("created_at"));
-  // }
 }
