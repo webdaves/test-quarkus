@@ -1,9 +1,10 @@
+import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Multi;
-import io.vertx.mutiny.pgclient.PgPool;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import java.util.stream.StreamSupport;
 
+@ApplicationScoped
 public class FruitService {
 
     @Inject
